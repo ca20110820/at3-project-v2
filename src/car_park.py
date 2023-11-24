@@ -104,9 +104,9 @@ class CarPark:
         if self.temperature is None or self.time is None:
             raise ValueError("Temperature or Time is None! It needs to be updated & modified.")
 
-        data = {'Temperature': self.temperature,
-                'Time': self.time,
-                'Available Bays': self.available_bays
+        data = {'temperature': self.temperature,
+                'time': self.time,
+                'available_bays': self.available_bays
                 }
 
         for display in self._displays:
