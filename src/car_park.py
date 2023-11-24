@@ -14,6 +14,9 @@ class CarPark:
                  displays=None
                  ):
 
+        if capacity < 1:
+            raise ValueError("Capacity cannot be less than 1!")
+
         self._location = location
         self._sensors = sensors or []  # Composition (typically instantiated inside)
         self._capacity = capacity  # Constant Value

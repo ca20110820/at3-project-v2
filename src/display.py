@@ -4,6 +4,9 @@ import tkinter as tk
 
 
 class Display:
+
+    fields = ['Temperature', 'Time', 'Available Bays']
+
     def __init__(self,
                  id,
                  car_park,
@@ -53,14 +56,14 @@ class TkDisplay(Display):
     DISPLAY_INIT = '– – –'
     SEP = ':'  # field name separator
 
-    def __init__(self, title: str, display_fields: Iterable[str], *args, **kwargs):
+    def __init__(self, title: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.window = tk.Tk()
         self.window.title(f'{title}: Parking')
-        self.window.geometry('800x400')
+        self.window.geometry('1150x400')
         self.window.resizable(False, False)
-        self.display_fields = display_fields
+        self.display_fields = self.fields
 
         self.gui_elements = {}
         for i, field in enumerate(self.display_fields):
@@ -85,9 +88,18 @@ class TkDisplay(Display):
 
         super().update(data)
 
+        temp_data = {}
+        for k, v in data.items():
+            if k == "temperature":
+                temp_data["Temperature"] = v
+            elif k == "time":
+                temp_data["Time"] = v.strftime('%Y-%m-%d %H:%M:%S')
+            elif k == "available_bays":
+                temp_data["Available Bays"] = v
+
         for field in self.gui_elements:
             if field.startswith('lbl_field'):
                 field_value = field.replace('field', 'value')
                 self.gui_elements[field_value].configure(
-                    text=data[self.gui_elements[field].cget('text').rstrip(self.SEP)])
+                    text=temp_data[self.gui_elements[field].cget('text').rstrip(self.SEP)])
         self.window.update()
