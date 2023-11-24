@@ -1,4 +1,6 @@
 from collections import deque
+from typing import Iterable
+import tkinter as tk
 
 
 class Display:
@@ -9,7 +11,6 @@ class Display:
                  is_on=False,
                  max_len=100,
                  ):
-
         self._id = id
         self._message = message
         self._is_on = is_on
@@ -20,7 +21,7 @@ class Display:
     @property
     def latest_data(self):
         return self._data[-1] if self._data else None
-    
+
     @property
     def message(self):
         return self._message
@@ -45,3 +46,48 @@ class Display:
         This method could be used to define an event-loop for GUI application.
         """
         raise NotImplementedError()
+
+
+class TkDisplay(Display):
+
+    DISPLAY_INIT = '– – –'
+    SEP = ':'  # field name separator
+
+    def __init__(self, title: str, display_fields: Iterable[str], *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.window = tk.Tk()
+        self.window.title(f'{title}: Parking')
+        self.window.geometry('800x400')
+        self.window.resizable(False, False)
+        self.display_fields = display_fields
+
+        self.gui_elements = {}
+        for i, field in enumerate(self.display_fields):
+            # create the elements
+            self.gui_elements[f'lbl_field_{i}'] = tk.Label(
+                self.window, text=field + self.SEP, font=('Arial', 50))
+            self.gui_elements[f'lbl_value_{i}'] = tk.Label(
+                self.window, text=self.DISPLAY_INIT, font=('Arial', 50))
+
+            # position the elements
+            self.gui_elements[f'lbl_field_{i}'].grid(
+                row=i, column=0, sticky=tk.E, padx=5, pady=5)
+            self.gui_elements[f'lbl_value_{i}'].grid(
+                row=i, column=2, sticky=tk.W, padx=10)
+
+    def show(self):
+        self.window.mainloop()
+
+    def update(self, data: dict):
+        """Update the values displayed in the GUI. Expects a dictionary with keys matching the field names
+        passed to the constructor."""
+
+        super().update(data)
+
+        for field in self.gui_elements:
+            if field.startswith('lbl_field'):
+                field_value = field.replace('field', 'value')
+                self.gui_elements[field_value].configure(
+                    text=data[self.gui_elements[field].cget('text').rstrip(self.SEP)])
+        self.window.update()
