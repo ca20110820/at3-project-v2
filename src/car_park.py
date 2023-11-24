@@ -41,10 +41,7 @@ class CarPark:
     
     @property
     def available_bays(self):
-        if self.num_plates <= self._capacity:
-            return self._capacity - self.num_plates
-        else:
-            return 0
+        return self._capacity - self.num_plates if self.num_plates <= self._capacity else 0
     
     @property
     def plates(self):
