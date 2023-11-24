@@ -1,3 +1,5 @@
+from pprint import pprint
+
 
 class Display:
     def __init__(self,
@@ -16,4 +18,4 @@ class Display:
 
     def update(self, data: dict) -> None:
         # Time:int, AvailableBays:int, Temperature: float
-        ...
+        pprint(data)

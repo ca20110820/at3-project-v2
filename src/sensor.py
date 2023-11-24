@@ -2,8 +2,6 @@ from abc import ABC, abstractmethod
 import random
 import string
 
-from src.car_park import CarPark
-
 
 class Sensor:
     def __init__(self,
@@ -13,11 +11,15 @@ class Sensor:
                  ):
         self._id = id
         self._is_active = is_active
-        self._car_park: CarPark = car_park
+        self._car_park = car_park
 
     @property
     def car_park(self):
         return self._car_park
+    
+    @property
+    def id(self):
+        return self._id
 
     def __str__(self):
         return f"id={self._id};is_active={self._is_active}"
@@ -27,11 +29,11 @@ class Sensor:
         pass
 
     def detect_car(self):
-        plate = self._scan_plate()
+        plate = self.scan_plate()
         self.update_car_park(plate)
 
     @abstractmethod
-    def _scan_plate(self):
+    def scan_plate(self):
         # Random Plate Generator (Entry) or Selector (Exit)
         pass
 
@@ -40,7 +42,7 @@ class EntrySensor(Sensor):
     def update_car_park(self, plate: str):
         self.car_park.add_car(plate)
 
-    def _scan_plate(self) -> str:
+    def scan_plate(self) -> str:
         """Generate Random Plate for Entering Car"""
         format_string = random.choice(["LLL-NNN", "NLL-NNN", "NLLL-NNN", "LL-NNNN", "TAXI-NNNN", "LLL-NNNN"])
 
@@ -66,6 +68,6 @@ class ExitSensor(Sensor):
         else:
             print(f"No Cars in the {self.car_park}")
 
-    def _scan_plate(self) -> str | None:
+    def scan_plate(self) -> str | None:
         """Randomly Select Car to Exit, if exists."""
         return random.choice(self._car_park.plates) if len(self._car_park.plates) > 0 else None
