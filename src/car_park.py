@@ -41,7 +41,7 @@ class CarPark:
     
     @property
     def available_bays(self):
-        return self._capacity - self.num_plates if self.num_plates <= self._capacity else 0
+        return self._capacity - self.num_plates if self.num_plates < self._capacity else 0
     
     @property
     def plates(self):
@@ -73,7 +73,7 @@ class CarPark:
 
     def register(self, obj: Sensor | Display):
         if not isinstance(obj, (Sensor, Display)):
-            raise TypeError(f"Object must either be Sensor or Display.")
+            raise TypeError("Object must either be Sensor or Display.")
 
         if isinstance(obj, Sensor):
             assert obj.car_park == self, "The object have different car park!"
