@@ -44,7 +44,7 @@ class CarPark:
     
     @property
     def available_bays(self):
-        return self._capacity - self.num_plates if self.num_plates < self._capacity else 0
+        return max(0, self._capacity - self.num_plates)
     
     @property
     def plates(self):
@@ -109,7 +109,8 @@ class CarPark:
 
         data = {'temperature': self.temperature,
                 'time': self.time,
-                'available_bays': self.available_bays
+                'available_bays': self.available_bays,
+                'num_plates': self.num_plates
                 }
 
         for display in self._displays:

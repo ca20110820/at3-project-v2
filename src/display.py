@@ -1,11 +1,10 @@
 from collections import deque
-from typing import Iterable
 import tkinter as tk
 
 
 class Display:
 
-    fields = ['Temperature', 'Time', 'Available Bays']
+    fields = ['Temperature', 'Time', 'Available Bays', 'Num of Cars']
 
     def __init__(self,
                  id,
@@ -53,7 +52,7 @@ class Display:
 
 class TkDisplay(Display):
 
-    DISPLAY_INIT = '– – –'
+    DISPLAY_INIT = '– – – – – –'
     SEP = ':'  # field name separator
 
     def __init__(self, title: str, *args, **kwargs):
@@ -63,10 +62,9 @@ class TkDisplay(Display):
         self.window.title(f'{title}: Parking')
         self.window.geometry('1150x400')
         self.window.resizable(False, False)
-        self.display_fields = self.fields
 
         self.gui_elements = {}
-        for i, field in enumerate(self.display_fields):
+        for i, field in enumerate(self.fields):
             # create the elements
             self.gui_elements[f'lbl_field_{i}'] = tk.Label(
                 self.window, text=field + self.SEP, font=('Arial', 50))
@@ -96,6 +94,10 @@ class TkDisplay(Display):
                 temp_data["Time"] = v.strftime('%Y-%m-%d %H:%M:%S')
             elif k == "available_bays":
                 temp_data["Available Bays"] = v
+            elif k == "num_plates":
+                temp_data["Num of Cars"] = v
+            else:
+                raise KeyError(f"Key '{k}' does not exist!")
 
         for field in self.gui_elements:
             if field.startswith('lbl_field'):
