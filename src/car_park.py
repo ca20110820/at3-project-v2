@@ -84,16 +84,6 @@ class CarPark:
         elif isinstance(obj, Display):
             self._displays.append(obj)
 
-    def create_sensor(self, sensor_type, id, is_active):
-        """Create a Sensor
-
-        This method is created due to the requirement of Sensor being a composition for CarPark class.
-        """
-        if id in [sensor.id for sensor in self._sensors]:
-            raise ValueError(f"The id {id} already exists!")
-
-        self._sensors.append(sensor_type(id, is_active, self))
-
     def add_car(self, plate: str):
         self._plates.append(plate)
         self.update_displays()
