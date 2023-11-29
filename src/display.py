@@ -17,6 +17,7 @@ class Display:
         self._message = message
         self._is_on = is_on
         self._car_park = car_park
+        self._car_park.register(self)
 
         self._data = deque(maxlen=max_len)
 

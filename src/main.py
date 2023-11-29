@@ -10,13 +10,9 @@ if __name__ == "__main__":
     entry_sensor = EntrySensor(1, True, car_park)
     exit_sensor = ExitSensor(2, True, car_park)
 
-    car_park.register(entry_sensor)
-    car_park.register(exit_sensor)
-
     detector = TkDetector(entry_sensor, exit_sensor)
 
     display = TkDisplay("Moondaloop Display", 1, car_park)
-    car_park.register(display)
 
     detector.start_sensing()
     display.show()

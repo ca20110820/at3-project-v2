@@ -3,7 +3,7 @@ import random
 import string
 
 
-class Sensor:
+class Sensor(ABC):
     def __init__(self,
                  id,
                  is_active,
@@ -12,6 +12,7 @@ class Sensor:
         self._id = id
         self._is_active = is_active
         self._car_park = car_park
+        self._car_park.register(self)
 
     @property
     def car_park(self):

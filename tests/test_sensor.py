@@ -11,9 +11,6 @@ class TestSensor(unittest.TestCase):
         self.entry_sensor = EntrySensor(1, True, self.car_park)
         self.exit_sensor = ExitSensor(2, True, self.car_park)
 
-        self.car_park.register(self.entry_sensor)
-        self.car_park.register(self.exit_sensor)
-
     def test_register_sensor(self):
         self.assertIn(self.entry_sensor, self.car_park.sensors)
         self.assertIn(self.exit_sensor, self.car_park.sensors)
