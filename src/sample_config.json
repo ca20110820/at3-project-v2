@@ -1,0 +1,12 @@
+{
+  "location": "Moondaloop Car Park",
+  "capacity": 100,
+  "sensors": [
+    {"type": "entry", "id": 1, "is_active": true},
+    {"type": "exit", "id": 2, "is_active": true}
+  ],
+  "displays": [
+    {"id": 1, "is_on": true, "max_len": 100},
+    {"id": 2, "is_on": true}
+  ]
+}

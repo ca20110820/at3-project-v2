@@ -22,6 +22,18 @@ class Display:
         self._data = deque(maxlen=max_len)
 
     @property
+    def id(self):
+        return self._id
+
+    @property
+    def is_on(self):
+        return self._is_on
+
+    @property
+    def car_park(self):
+        return self._car_park
+
+    @property
     def latest_data(self):
         return self._data[-1] if self._data else None
 
@@ -42,6 +54,11 @@ class Display:
     def update(self, data: dict) -> None:
         # time: datetime, available_bays: int, temperature: float
         self._data.append(data)
+
+        try:
+            self._message = data['message']
+        except KeyError:
+            pass
 
     def show(self, *args, **kwargs):
         """Override and Implement the Show method.
