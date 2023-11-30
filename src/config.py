@@ -4,7 +4,7 @@ import json
 
 from src.sensor import Sensor, EntrySensor, ExitSensor
 from car_park import CarPark
-from src.display import Display
+from src.display import Display, TkDisplay
 
 
 class Config:
@@ -72,3 +72,7 @@ class Config:
                                    )
 
             self._displays.append(temp_display)
+
+
+if __name__ == "__main__":
+    Config(Path(__file__).resolve().parent, TkDisplay)
