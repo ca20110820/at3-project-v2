@@ -75,4 +75,5 @@ class Config:
 
 
 if __name__ == "__main__":
-    Config(Path(__file__).resolve().parent, TkDisplay)
+    # Example
+    Config(Path(__file__).resolve().parent / 'sample_config.json', Display)
