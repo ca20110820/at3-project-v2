@@ -1,4 +1,5 @@
 import random
+from pathlib import Path
 from datetime import datetime
 
 from src.sensor import Sensor
@@ -11,7 +12,8 @@ class CarPark:
                  capacity,
                  plates=None,
                  sensors=None,
-                 displays=None
+                 displays=None,
+                 log_file='log.txt'
                  ):
 
         if capacity < 1:
@@ -22,6 +24,10 @@ class CarPark:
         self._capacity = capacity  # Constant Value
         self._plates = plates or []
         self._displays = displays or []  # Aggregation (typically instantiated outside)
+
+        self.log_file = Path(log_file)
+        if not self.log_file.exists():
+            self.log_file.touch()
 
         self._time_func = lambda: datetime.now()  # Default Time Generator
         self._temperature_func = lambda: random.randint(20, 30)  # Default Temperature Generator
@@ -84,14 +90,22 @@ class CarPark:
         elif isinstance(obj, Display):
             self._displays.append(obj)
 
+    def _log_car(self, action: str, plate: str):
+        with self.log_file.open(mode='a') as file:
+            file.write(f"{datetime.now().strftime('%d-%m %H:%M')} | {plate} {action}\n")
+
     def add_car(self, plate: str):
         self._plates.append(plate)
         self.update_displays()
+
+        self._log_car("entered", plate)
 
     def remove_car(self, plate: str):
         self._plates.remove(plate)
         # self.plates = [p for p in self.plates if p != plate]
         self.update_displays()
+
+        self._log_car("exited", plate)
 
     def update_displays(self):
         if self.temperature is None or self.time is None:
