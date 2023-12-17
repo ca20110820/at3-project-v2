@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import tkinter as tk
 
-from src.sensor import EntrySensor, ExitSensor
+from smartpark.sensor import EntrySensor, ExitSensor
 
 
 class Detector(ABC):

@@ -1,5 +1,5 @@
 import unittest
-from car_park import CarPark
+from smartpark.car_park import CarPark
 
 
 class TestCarPark(unittest.TestCase):

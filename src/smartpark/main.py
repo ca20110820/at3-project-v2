@@ -1,7 +1,7 @@
-from src.sensor import EntrySensor, ExitSensor
-from src.detector import TkDetector
-from src.car_park import CarPark
-from src.display import TkDisplay
+from smartpark.sensor import EntrySensor, ExitSensor
+from smartpark.detector import TkDetector
+from smartpark.car_park import CarPark
+from smartpark.display import TkDisplay
 
 
 if __name__ == "__main__":

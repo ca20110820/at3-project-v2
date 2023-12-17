@@ -17,7 +17,7 @@ class Sensor(ABC):
     @property
     def car_park(self):
         return self._car_park
-    
+
     @property
     def id(self):
         return self._id

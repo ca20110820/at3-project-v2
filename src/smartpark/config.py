@@ -2,9 +2,9 @@ from typing import List
 from pathlib import Path
 import json
 
-from src.sensor import Sensor, EntrySensor, ExitSensor
-from car_park import CarPark
-from src.display import Display, TkDisplay
+from smartpark.sensor import Sensor, EntrySensor, ExitSensor
+from smartpark.car_park import CarPark
+from smartpark.display import Display, TkDisplay
 
 
 class Config:

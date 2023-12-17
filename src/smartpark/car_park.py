@@ -2,8 +2,8 @@ import random
 from pathlib import Path
 from datetime import datetime
 
-from src.sensor import Sensor
-from src.display import Display
+from smartpark.sensor import Sensor
+from smartpark.display import Display
 
 
 class CarPark:

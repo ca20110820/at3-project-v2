@@ -1,7 +1,7 @@
 import unittest
 
-from display import Display
-from car_park import CarPark
+from smartpark.display import Display
+from smartpark.car_park import CarPark
 
 
 class TestDisplay(unittest.TestCase):

@@ -1,7 +1,7 @@
 import unittest
 
-from car_park import CarPark
-from src.sensor import Sensor, EntrySensor, ExitSensor
+from smartpark.car_park import CarPark
+from smartpark.sensor import Sensor, EntrySensor, ExitSensor
 
 
 class TestSensor(unittest.TestCase):
